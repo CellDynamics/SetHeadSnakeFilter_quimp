@@ -5,6 +5,7 @@
  */
 
 import java.awt.Choice;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -12,6 +13,8 @@ import java.awt.event.ItemListener;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.vecmath.Point2d;
+import javax.vecmath.Vector2d;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,7 +57,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         // configure window, names of UI elements are also names of variables
         // exported/imported by set/getPluginConfig
         uiDefinition.put("name", "SetHeadSnakeFilter"); // name of win
-        uiDefinition.put("method", "choice, minX, minCentroid");
+        uiDefinition.put("method", "choice, minX, nearestCentroid, minXY");
         uiDefinition.put("help", "");
         buildWindow(uiDefinition); // construct ui (not shown yet)
     }
@@ -90,8 +93,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
     public Snake runPlugin() throws QuimpPluginException {
         method = getStringFromUI("method");
         LOGGER.debug(String.format("Run plugin with params: method %s", method));
-        int count = 0;
-        int pos = count;
+        int pos = 1;
         Node n = snake.getHead();
         switch (method) {
             case "minX": {
@@ -105,20 +107,12 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
                     }
                     LOGGER.debug("node: " + n.toString());
                     n = n.getNext();
-                    count++;
                 } while (!n.isHead());
                 // go to pos node
-                n = snake.getHead();
-                Node oldhead = n;
-                do {
-                    n = n.getNext();
-                } while (n.getTrackNum() != pos && !n.isHead());
-                n.setHead(true);
-                oldhead.setHead(false);
-                snake.findHead();
+                snake.setNewHead(pos);
                 break;
             }
-            case "minCentroid": {
+            case "nearestCentroid": {
                 ExtendedVector2d c = snake.getCentroid();
                 double mindist = Double.MAX_VALUE;
                 do {
@@ -128,27 +122,53 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
                     if (len < mindist) {
                         mindist = len;
                         pos = n.getTrackNum();
-                        ;
                     }
                     LOGGER.debug("Distance: " + len + " between " + n.toString());
                     n = n.getNext();
-                    count++;
                 } while (!n.isHead());
                 // go to pos node
-                n = snake.getHead();
-                Node oldhead = n;
-                do {
-                    n = n.getNext();
-                } while (n.getTrackNum() != pos && !n.isHead());
-                n.setHead(true);
-                oldhead.setHead(false);
-                snake.findHead();
+                snake.setNewHead(pos);
+                break;
+            }
+            case "minXY": {
+                pos = findNearest(snake);
+                // go to pos node
+                snake.setNewHead(pos);
                 break;
             }
             default:
                 throw new QuimpPluginException("Method not supported. check config data");
         }
         return snake;
+    }
+
+    /**
+     * Return point which is nearest to lower left point of bounding box
+     * 
+     * @param s Snake to be analyzed
+     * @return Index of Snake Node which is closest to considered point. Nodes are counted from 1
+     */
+    protected int findNearest(Snake s) {
+        Rectangle bounds = s.getBounds();
+        LOGGER.debug("Rectangle pos: " + bounds.getX() + " " + bounds.getY());
+        Point2d p0 = new Point2d(bounds.getX(), bounds.getY());
+        // calculate lengths
+        Node n = s.getHead();
+        int pos = 1;
+        double len;
+        double minlen = Double.MAX_VALUE;
+        do {
+            Vector2d v = new Vector2d(n.getX(), n.getY());
+            v.sub(p0);
+            len = v.length();
+            if (len < minlen) {
+                minlen = len;
+                pos = n.getTrackNum();
+            }
+            LOGGER.debug("Distance: " + len + " between " + n.toString());
+            n = n.getNext();
+        } while (!n.isHead());
+        return pos;
     }
 
     @Override
