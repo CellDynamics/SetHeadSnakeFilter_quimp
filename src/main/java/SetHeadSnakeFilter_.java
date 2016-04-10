@@ -5,11 +5,11 @@
  */
 
 import java.awt.Choice;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -30,7 +30,21 @@ import uk.ac.warwick.wsbc.QuimP.plugin.snakes.IQuimpSnakeFilter;
 import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
 
 /**
- * Implements filter that change first node of Snake object
+ * Implements filter that change first node of Snake object.
+ * 
+ * This filter modify of input data passed as reference. The following methods are currently 
+ * supported:
+ * -# minX
+ * -# nearestCentroid
+ * -# minXY
+ * 
+ * The first method \b minX selects new head node as node that has smallest \c X coordinate.
+ * 
+ * The second method \b nearestCentroid calculates distance between every node and Snake centroid
+ * and selects as head node the node that is closest to centroid.
+ * 
+ * The third method \b minXY evaluates bounding box of Snake. Then as head node the point that is
+ * closest to left upper corner of bounding box is set.      
  * 
  * @author p.baniukiewicz
  * @date 4 Apr 2016
@@ -45,11 +59,11 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
     private static final Logger LOGGER = LogManager.getLogger(SetHeadSnakeFilter_.class.getName());
     private ParamList uiDefinition; //!< Definition of UI
     protected ViewUpdater qcontext; //!< remember QuimP context to recalculate and update its view
-    private String method;
-    private Snake snake;
+    private String method; //!< method of choosing head node as entry in Choice selector
+    private Snake snake; //!< reference to input data
     
     /**
-     * 
+     * Construct GUI window
      */
     public SetHeadSnakeFilter_() {
         // create UI using QWindowBuilder
@@ -58,7 +72,10 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         // exported/imported by set/getPluginConfig
         uiDefinition.put("name", "SetHeadSnakeFilter"); // name of win
         uiDefinition.put("method", "choice, minX, nearestCentroid, minXY");
-        uiDefinition.put("help", "");
+        uiDefinition.put("help",
+                "Short description:\nminX - set head to point with smallest X coordinate"
+                        + "\nnearestCentroid - set head to point which is closest to centroid point"
+                        + "\nminXY - set head to point which is closest to corner of bounding box");
         buildWindow(uiDefinition); // construct ui (not shown yet)
     }
 
@@ -67,16 +84,36 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         return DOES_SNAKES + MODIFY_INPUT;
     }
 
+    /**
+     * Configure plugin and overrides default values.
+     * 
+     * Supported keys:
+     * <ol>
+     * <li>\c method - method of choosing head node
+     * </ol>
+     * 
+     * @param par configuration as pairs <key,val>. Keys are defined by plugin
+     * creator and plugin caller do not modify them.
+     * @throws QuimpPluginException on wrong parameters list or wrong parameter
+     * conversion
+     * @see wsbc.plugin.IQuimpPlugin.setPluginConfig(HashMap<String, String>)
+     */
     @Override
     public void setPluginConfig(ParamList par) throws QuimpPluginException {
-        // TODO Auto-generated method stub
+        try {
+            method = par.getStringValue("method");
+            setValues(par); // copy incoming parameters to UI
+        } catch (Exception e) {
+            // we should never hit this exception as parameters are not touched by caller they are
+            // only passed to configuration saver and restored from it
+            throw new QuimpPluginException("Wrong input argument->" + e.getMessage(), e);
+        }
 
     }
 
     @Override
     public ParamList getPluginConfig() {
-        // TODO Auto-generated method stub
-        return null;
+        return getValues();
     }
 
     @Override
@@ -146,10 +183,10 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
      * Return point which is nearest to lower left point of bounding box
      * 
      * @param s Snake to be analyzed
-     * @return Index of Snake Node which is closest to considered point. Nodes are counted from 1
+     * @return Index of Snake Node which is closest to considered point. Nodes are numbered from 1
      */
     protected int findNearest(Snake s) {
-        Rectangle bounds = s.getBounds();
+        Rectangle2D.Double bounds = s.getDoubleBounds();
         LOGGER.debug("Rectangle pos: " + bounds.getX() + " " + bounds.getY());
         Point2d p0 = new Point2d(bounds.getX(), bounds.getY());
         // calculate lengths
@@ -183,6 +220,20 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         qcontext = b;
     }
 
+    /**
+     * Override window builder to add listeners to GUI 
+     */
+    @Override
+    public void buildWindow(final ParamList def) {
+        super.buildWindow(def); // window must be built first
+        // attach listener to selected ui
+        ((Choice) ui.get("method")).addItemListener(this);
+        applyB.addActionListener(this); // attach listener to apply button
+    }
+
+    /**
+     * Update view on any change in GUI
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object b = e.getSource();
@@ -192,6 +243,9 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         }
     }
 
+    /**
+     * Update view on any change in GUI
+     */
     @Override
     public void stateChanged(ChangeEvent ce) {
         if (isWindowVisible() == true) {
@@ -201,14 +255,9 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
 
     }
 
-    @Override
-    public void buildWindow(final ParamList def) {
-        super.buildWindow(def); // window must be built first
-        // attach listener to selected ui
-        ((Choice) ui.get("method")).addItemListener(this);
-        applyB.addActionListener(this); // attach listener to apply button
-    }
-
+    /**
+     * Update view on any change in GUI
+     */
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (isWindowVisible() == true) {
