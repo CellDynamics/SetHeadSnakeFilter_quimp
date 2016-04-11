@@ -126,6 +126,11 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         return "1.0.0-SNAPSHOT";
     }
 
+    /**
+     * Main plugin runner
+     * 
+     * @todo TODO Clean this method moving cases to separate functions
+     */
     @Override
     public Snake runPlugin() throws QuimpPluginException {
         method = getStringFromUI("method");
@@ -168,7 +173,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
                 break;
             }
             case "minXY": {
-                pos = findNearest(snake);
+                pos = findNearestToBoundingBox(snake);
                 // go to pos node
                 snake.setNewHead(pos);
                 break;
@@ -185,7 +190,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
      * @param s Snake to be analyzed
      * @return Index of Snake Node which is closest to considered point. Nodes are numbered from 1
      */
-    protected int findNearest(Snake s) {
+    private int findNearestToBoundingBox(Snake s) {
         Rectangle2D.Double bounds = s.getDoubleBounds();
         LOGGER.debug("Rectangle pos: " + bounds.getX() + " " + bounds.getY());
         Point2d p0 = new Point2d(bounds.getX(), bounds.getY());

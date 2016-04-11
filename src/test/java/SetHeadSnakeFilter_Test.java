@@ -1,5 +1,8 @@
 import static org.junit.Assert.assertEquals;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -28,6 +31,34 @@ public class SetHeadSnakeFilter_Test {
     private static final Logger LOGGER =
             LogManager.getLogger(SetHeadSnakeFilter_Test.class.getName());
 
+    /**
+     * Accessor to private fields
+     * 
+     * Example of use:
+     * @code{.java}
+     * Snake s = new Snake(pr, 1);
+     * int ret = (int) accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s },
+     *           new Class[] { Snake.class });
+     * @endcode   
+     * 
+     * @param name Name of private method
+     * @param obj Reference to object 
+     * @param param Array of parameters if any
+     * @param paramtype Array of classes of \c param
+     * @throws SecurityException 
+     * @throws NoSuchMethodException 
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
+     * @throws IllegalAccessException         
+     */
+    static Object accessPrivate(String name, SetHeadSnakeFilter_ obj, Object[] param,
+            Class<?>[] paramtype) throws NoSuchMethodException, SecurityException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Method prv = obj.getClass().getDeclaredMethod(name, paramtype);
+        prv.setAccessible(true);
+        return prv.invoke(obj, param);
+    }
+
     private DataLoader d1, d2, d3;
     private SetHeadSnakeFilter_ testobj;
 
@@ -50,28 +81,31 @@ public class SetHeadSnakeFilter_Test {
     }
 
     @Test
-    public void testFindNearest() throws Exception {
+    public void testFindNearestToBoundingBox() throws Exception {
         PolygonRoi pr = new PolygonRoi(d1.getFloatPolygon(), Roi.POLYGON);
         Snake s = new Snake(pr, 1);
-        int ret = testobj.findNearest(s);
+        int ret = (int) accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s },
+                new Class[] { Snake.class });
         assertEquals(1, ret);
     }
 
     @Test
-    public void testFindNearest_1() throws Exception {
+    public void testFindNearestToBoundingBox_1() throws Exception {
         PolygonRoi pr = new PolygonRoi(d2.getFloatPolygon(), Roi.POLYGON);
         LOGGER.debug(d2.toString());
         Snake s = new Snake(pr, 1);
-        int ret = testobj.findNearest(s);
+        int ret = (int) accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s },
+                new Class[] { Snake.class });
         assertEquals(4, ret);
     }
 
     @Test
-    public void testFindNearest_2() throws Exception {
+    public void testFindNearestToBoundingBox_2() throws Exception {
         PolygonRoi pr = new PolygonRoi(d3.getFloatPolygon(), Roi.POLYGON);
         LOGGER.debug(d3.toString());
         Snake s = new Snake(pr, 1);
-        int ret = testobj.findNearest(s);
+        int ret = (int) accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s },
+                new Class[] { Snake.class });
         assertEquals(5, ret);
     }
 
