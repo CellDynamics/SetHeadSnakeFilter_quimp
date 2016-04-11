@@ -57,11 +57,11 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         System.setProperty("log4j.configurationFile", "setheadsnakefilterlog4j2.xml");
     }
     private static final Logger LOGGER = LogManager.getLogger(SetHeadSnakeFilter_.class.getName());
-    private ParamList uiDefinition; //!< Definition of UI
-    protected ViewUpdater qcontext; //!< remember QuimP context to recalculate and update its view
-    private String method; //!< method of choosing head node as entry in Choice selector
-    private Snake snake; //!< reference to input data
-    
+    private ParamList uiDefinition; /*!< Definition of UI */
+    protected ViewUpdater qcontext; /*!< remember QuimP context to recalculate and update its view*/
+    private String method; /*!< method of choosing head node as entry in Choice selector */
+    private Snake snake; /*!< reference to input data */
+
     /**
      * Construct GUI window
      */
