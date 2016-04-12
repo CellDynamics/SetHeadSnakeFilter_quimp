@@ -147,7 +147,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
                         minX = n.getX();
                         pos = n.getTrackNum();
                     }
-                    LOGGER.debug("node: " + n.toString());
+                    LOGGER.trace("node: " + n.toString());
                     n = n.getNext();
                 } while (!n.isHead());
                 // go to pos node
@@ -165,7 +165,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
                         mindist = len;
                         pos = n.getTrackNum();
                     }
-                    LOGGER.debug("Distance: " + len + " between " + n.toString());
+                    LOGGER.trace("Distance: " + len + " between " + n.toString());
                     n = n.getNext();
                 } while (!n.isHead());
                 // go to pos node
@@ -207,7 +207,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
                 minlen = len;
                 pos = n.getTrackNum();
             }
-            LOGGER.debug("Distance: " + len + " between " + n.toString());
+            LOGGER.trace("Distance: " + len + " between " + n.toString());
             n = n.getNext();
         } while (!n.isHead());
         return pos;
