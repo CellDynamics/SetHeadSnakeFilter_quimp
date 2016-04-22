@@ -271,4 +271,9 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
         }
     }
 
+    @Override
+    public String about() {
+        return "Author: Piotr Baniukiewicz\n" + "mail: p.baniukiewicz@warwick.ac.uk";
+    }
+
 }
