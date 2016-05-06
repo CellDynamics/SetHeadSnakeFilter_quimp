@@ -123,7 +123,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
 
     @Override
     public String getVersion() {
-        return "1.0.0-SNAPSHOT";
+        return "1.0.0";
     }
 
     /**
@@ -273,7 +273,8 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
 
     @Override
     public String about() {
-        return "Author: Piotr Baniukiewicz\n" + "mail: p.baniukiewicz@warwick.ac.uk";
+        return "Select head node in outline\nAuthor: Piotr Baniukiewicz\n"
+                + "mail: p.baniukiewicz@warwick.ac.uk";
     }
 
 }
