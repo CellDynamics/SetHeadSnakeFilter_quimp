@@ -1,3 +1,4 @@
+package quimp.plugin;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;

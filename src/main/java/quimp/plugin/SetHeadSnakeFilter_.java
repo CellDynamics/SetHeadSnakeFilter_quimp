@@ -3,7 +3,7 @@
  * @file SetHeadSnakeFilter_.java
  * @date 4 Apr 2016
  */
-
+package quimp.plugin;
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
