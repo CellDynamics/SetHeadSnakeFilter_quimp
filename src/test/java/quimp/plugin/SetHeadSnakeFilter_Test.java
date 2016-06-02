@@ -1,4 +1,5 @@
 package quimp.plugin;
+
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,6 +13,8 @@ import org.junit.Test;
 
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;
+import uk.ac.warwick.wsbc.QuimP.BOAState;
+import uk.ac.warwick.wsbc.QuimP.BOA_;
 import uk.ac.warwick.wsbc.QuimP.Snake;
 import uk.ac.warwick.wsbc.QuimP.plugin.utils.DataLoader;
 
@@ -72,6 +75,7 @@ public class SetHeadSnakeFilter_Test {
         d1 = new DataLoader("src/test/resources/test1.txt");
         d2 = new DataLoader("src/test/resources/test2.txt");
         d3 = new DataLoader("src/test/resources/test3.txt");
+        BOA_.qState = new BOAState();
     }
 
     /**
