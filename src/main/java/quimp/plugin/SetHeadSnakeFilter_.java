@@ -4,6 +4,7 @@
  * @date 4 Apr 2016
  */
 package quimp.plugin;
+
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -123,7 +124,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
 
     @Override
     public String getVersion() {
-        return "1.0.0";
+        return "1.0.1";
     }
 
     /**
