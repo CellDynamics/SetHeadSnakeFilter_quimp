@@ -28,7 +28,7 @@ import uk.ac.warwick.wsbc.QuimP.geom.ExtendedVector2d;
 import uk.ac.warwick.wsbc.QuimP.plugin.IQuimpPluginSynchro;
 import uk.ac.warwick.wsbc.QuimP.plugin.ParamList;
 import uk.ac.warwick.wsbc.QuimP.plugin.QuimpPluginException;
-import uk.ac.warwick.wsbc.QuimP.plugin.snakes.IQuimpSnakeFilter;
+import uk.ac.warwick.wsbc.QuimP.plugin.snakes.IQuimpBOASnakeFilter;
 import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
 
 /**
@@ -52,7 +52,7 @@ import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
  * @date 4 Apr 2016
  *
  */
-public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFilter,
+public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnakeFilter,
         IQuimpPluginSynchro, ChangeListener, ActionListener, ItemListener {
 
     static {
@@ -190,7 +190,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
     }
 
     /**
-     * Return point which is nearest to lower left point of bounding box
+     * Return point which is nearest to lower left point of bounding box.
      * 
      * @param s Snake to be analyzed
      * @return Index of Snake Node which is closest to considered point. Nodes are numbered from 1
