@@ -19,6 +19,7 @@ import javax.vecmath.Vector2d;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 
 import uk.ac.warwick.wsbc.QuimP.Node;
 import uk.ac.warwick.wsbc.QuimP.Snake;
@@ -27,7 +28,7 @@ import uk.ac.warwick.wsbc.QuimP.geom.ExtendedVector2d;
 import uk.ac.warwick.wsbc.QuimP.plugin.IQuimpPluginSynchro;
 import uk.ac.warwick.wsbc.QuimP.plugin.ParamList;
 import uk.ac.warwick.wsbc.QuimP.plugin.QuimpPluginException;
-import uk.ac.warwick.wsbc.QuimP.plugin.snakes.IQuimpSnakeFilter;
+import uk.ac.warwick.wsbc.QuimP.plugin.snakes.IQuimpBOASnakeFilter;
 import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
 
 /**
@@ -51,11 +52,14 @@ import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
  * @date 4 Apr 2016
  *
  */
-public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFilter,
+public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnakeFilter,
         IQuimpPluginSynchro, ChangeListener, ActionListener, ItemListener {
 
     static {
-        System.setProperty("log4j.configurationFile", "setheadsnakefilterlog4j2.xml");
+        if (System.getProperty("quimp.debugLevel") == null)
+            Configurator.initialize(null, "log4j2_default.xml");
+        else
+            Configurator.initialize(null, System.getProperty("quimp.debugLevel"));
     }
     private static final Logger LOGGER = LogManager.getLogger(SetHeadSnakeFilter_.class.getName());
     private ParamList uiDefinition; /*!< Definition of UI */
@@ -186,7 +190,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpSnakeFi
     }
 
     /**
-     * Return point which is nearest to lower left point of bounding box
+     * Return point which is nearest to lower left point of bounding box.
      * 
      * @param s Snake to be analyzed
      * @return Index of Snake Node which is closest to considered point. Nodes are numbered from 1
