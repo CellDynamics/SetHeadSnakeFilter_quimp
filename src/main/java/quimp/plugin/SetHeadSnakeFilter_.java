@@ -17,11 +17,11 @@ import javax.swing.event.ChangeListener;
 import javax.vecmath.Point2d;
 import javax.vecmath.Vector2d;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.config.Configurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import uk.ac.warwick.wsbc.QuimP.Node;
+import uk.ac.warwick.wsbc.QuimP.PropertyReader;
 import uk.ac.warwick.wsbc.QuimP.Snake;
 import uk.ac.warwick.wsbc.QuimP.ViewUpdater;
 import uk.ac.warwick.wsbc.QuimP.geom.ExtendedVector2d;
@@ -34,11 +34,8 @@ import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
 /**
  * Implements filter that change first node of Snake object.
  * 
- * This filter modify of input data passed as reference. The following methods are currently 
- * supported:
- * -# minX
- * -# nearestCentroid
- * -# minXY
+ * This filter modify of input data passed as reference. The following methods are currently
+ * supported: -# minX -# nearestCentroid -# minXY
  * 
  * The first method \b minX selects new head node as node that has smallest \c X coordinate.
  * 
@@ -46,7 +43,7 @@ import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
  * and selects as head node the node that is closest to centroid.
  * 
  * The third method \b minXY evaluates bounding box of Snake. Then as head node the point that is
- * closest to left upper corner of bounding box is set.      
+ * closest to left upper corner of bounding box is set.
  * 
  * @author p.baniukiewicz
  * @date 4 Apr 2016
@@ -55,13 +52,7 @@ import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
 public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnakeFilter,
         IQuimpPluginSynchro, ChangeListener, ActionListener, ItemListener {
 
-    static {
-        if (System.getProperty("quimp.debugLevel") == null)
-            Configurator.initialize(null, "log4j2_default.xml");
-        else
-            Configurator.initialize(null, System.getProperty("quimp.debugLevel"));
-    }
-    private static final Logger LOGGER = LogManager.getLogger(SetHeadSnakeFilter_.class.getName());
+    static final Logger LOGGER = LoggerFactory.getLogger(SetHeadSnakeFilter_.class.getName());
     private ParamList uiDefinition; /*!< Definition of UI */
     protected ViewUpdater qcontext; /*!< remember QuimP context to recalculate and update its view*/
     private String method; /*!< method of choosing head node as entry in Choice selector */
@@ -97,10 +88,9 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
      * <li>\c method - method of choosing head node
      * </ol>
      * 
-     * @param par configuration as pairs <key,val>. Keys are defined by plugin
-     * creator and plugin caller do not modify them.
-     * @throws QuimpPluginException on wrong parameters list or wrong parameter
-     * conversion
+     * @param par configuration as pairs <key,val>. Keys are defined by plugin creator and plugin
+     *        caller do not modify them.
+     * @throws QuimpPluginException on wrong parameters list or wrong parameter conversion
      * @see wsbc.plugin.IQuimpPlugin.setPluginConfig(HashMap<String, String>)
      */
     @Override
@@ -128,7 +118,12 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
 
     @Override
     public String getVersion() {
-        return "1.0.1";
+        String trimmedClassName = getClass().getSimpleName();
+        trimmedClassName = trimmedClassName.substring(0, trimmedClassName.length() - 1); // no _
+        // _ at the end of class does not appears in final jar name, we need it to
+        // distinguish between plugins
+        return PropertyReader.readProperty(getClass(), trimmedClassName,
+                "quimp/plugin/plugin.properties", "internalVersion");
     }
 
     /**
@@ -231,7 +226,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
     }
 
     /**
-     * Override window builder to add listeners to GUI 
+     * Override window builder to add listeners to GUI
      */
     @Override
     public void buildWindow(final ParamList def) {

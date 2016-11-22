@@ -5,11 +5,11 @@ import static org.junit.Assert.assertEquals;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;
@@ -29,31 +29,27 @@ import uk.ac.warwick.wsbc.QuimP.plugin.utils.DataLoader;
  *
  */
 public class SetHeadSnakeFilter_Test {
-    static {
-        System.setProperty("log4j.configurationFile", "setheadsnakefilterlog4j2.xml");
-    }
-    private static final Logger LOGGER =
-            LogManager.getLogger(SetHeadSnakeFilter_Test.class.getName());
+    static final Logger LOGGER = LoggerFactory.getLogger(SetHeadSnakeFilter_Test.class.getName());
 
     /**
      * Accessor to private fields
      * 
      * Example of use:
-     * @code{.java}
-     * Snake s = new Snake(pr, 1);
-     * int ret = (int) accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s },
-     *           new Class[] { Snake.class });
-     * @endcode   
+     * 
+     * @code{.java} Snake s = new Snake(pr, 1); int ret = (int)
+     *              accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s }, new
+     *              Class[] { Snake.class });
+     * @endcode
      * 
      * @param name Name of private method
-     * @param obj Reference to object 
+     * @param obj Reference to object
      * @param param Array of parameters if any
      * @param paramtype Array of classes of \c param
-     * @throws SecurityException 
-     * @throws NoSuchMethodException 
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException         
+     * @throws SecurityException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
      */
     static Object accessPrivate(String name, SetHeadSnakeFilter_ obj, Object[] param,
             Class<?>[] paramtype) throws NoSuchMethodException, SecurityException,
