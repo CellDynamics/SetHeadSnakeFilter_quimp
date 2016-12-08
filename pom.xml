@@ -4,21 +4,21 @@
 		<groupId>uk.ac.warwick.wsbc</groupId>
 		<artifactId>pom-quimp-plugin</artifactId>
 		<version>16.12.01</version>
-		<relativePath/>
+		<relativePath />
 		<!-- http://stackoverflow.com/questions/6003831/parent-relativepath-points-at-my-com-mycompanymyproject-instead-of-org-apache -->
 	</parent>
 	<!-- Project's coordinates -->
 	<groupId>uk.ac.warwick.wsbc</groupId>
 	<artifactId>SetHeadSnakeFilter-quimp</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<!-- Name and licencing and other project informations -->
 	<name>SetHeadSnakeFilter-quimp</name>
 	<scm>
 		<connection>scm:git:file://localhost/home/baniuk/Documents/Repos/SetHeadSnakeFilter-quimp</connection>
 		<developerConnection>scm:git:file://localhost/home/baniuk/Documents/Repos/SetHeadSnakeFilter-quimp</developerConnection>
 		<url>http://www.trac-wsbc.linkpc.net:8080/cgit/SetHeadSnakeFilter-quimp.git/</url>
-		<tag>HEAD</tag>
+		<tag>v1.0.4</tag>
 	</scm>
 	<issueManagement>
 		<system>Trac</system>
@@ -59,7 +59,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	<reporting/>
+	<reporting />
 	<dependencies>
 		<dependency>
 			<groupId>net.imagej</groupId>
