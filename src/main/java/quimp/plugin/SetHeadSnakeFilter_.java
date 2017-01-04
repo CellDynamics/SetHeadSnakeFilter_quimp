@@ -14,9 +14,9 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.vecmath.Point2d;
-import javax.vecmath.Vector2d;
 
+import org.scijava.vecmath.Point2d;
+import org.scijava.vecmath.Vector2d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
