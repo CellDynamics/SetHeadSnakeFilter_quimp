@@ -14,9 +14,9 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.vecmath.Point2d;
-import javax.vecmath.Vector2d;
 
+import org.scijava.vecmath.Point2d;
+import org.scijava.vecmath.Vector2d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,7 +91,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
      * @param par configuration as pairs <key,val>. Keys are defined by plugin creator and plugin
      *        caller do not modify them.
      * @throws QuimpPluginException on wrong parameters list or wrong parameter conversion
-     * @see wsbc.plugin.IQuimpPlugin.setPluginConfig(HashMap<String, String>)
+     * @see uk.ac.warwick.wsbc.QuimP.plugin.IQuimpPlugin#setPluginConfig(ParamList)
      */
     @Override
     public void setPluginConfig(ParamList par) throws QuimpPluginException {
@@ -129,10 +129,10 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
     /**
      * Main plugin runner
      * 
-     * @todo TODO Clean this method moving cases to separate functions
      */
     @Override
     public Snake runPlugin() throws QuimpPluginException {
+        // TODO Clean this method moving cases to separate functions
         method = getStringFromUI("method");
         LOGGER.debug(String.format("Run plugin with params: method %s", method));
         int pos = 1;
