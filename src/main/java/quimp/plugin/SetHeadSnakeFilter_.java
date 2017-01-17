@@ -129,10 +129,10 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
     /**
      * Main plugin runner
      * 
-     * @todo TODO Clean this method moving cases to separate functions
      */
     @Override
     public Snake runPlugin() throws QuimpPluginException {
+        // TODO Clean this method moving cases to separate functions
         method = getStringFromUI("method");
         LOGGER.debug(String.format("Run plugin with params: method %s", method));
         int pos = 1;
