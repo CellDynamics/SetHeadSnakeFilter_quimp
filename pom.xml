@@ -11,14 +11,14 @@
 	<groupId>uk.ac.warwick.wsbc</groupId>
 	<artifactId>SetHeadSnakeFilter-quimp</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.5</version>
 	<!-- Name and licencing and other project informations -->
 	<name>SetHeadSnakeFilter-quimp</name>
 	<scm>
 		<connection>scm:git:file://localhost/home/baniuk/Documents/Repos/SetHeadSnakeFilter-quimp</connection>
 		<developerConnection>scm:git:file://localhost/home/baniuk/Documents/Repos/SetHeadSnakeFilter-quimp</developerConnection>
 		<url>http://www.trac-wsbc.linkpc.net:8080/cgit/SetHeadSnakeFilter-quimp.git/</url>
-		<tag>HEAD</tag>
+		<tag>v1.0.5</tag>
 	</scm>
 	<issueManagement>
 		<system>Trac</system>
