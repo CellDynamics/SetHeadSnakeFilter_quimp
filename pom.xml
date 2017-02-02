@@ -3,8 +3,8 @@
 	<parent>
 		<groupId>uk.ac.warwick.wsbc</groupId>
 		<artifactId>pom-quimp-plugin</artifactId>
-		<version>17.01.02-SNAPSHOT</version>
-		<relativePath />
+		<version>17.02.02-SNAPSHOT</version>
+		<relativePath/>
 		<!-- http://stackoverflow.com/questions/6003831/parent-relativepath-points-at-my-com-mycompanymyproject-instead-of-org-apache -->
 	</parent>
 	<!-- Project's coordinates -->
@@ -59,13 +59,37 @@
 			</plugin>
 		</plugins>
 	</build>
-	<reporting />
+	<reporting/>
 	<dependencies>
 		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
 			<version>1.50d</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>uk.ac.warwick.wsbc</groupId>
+			<artifactId>QuimP_</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.scijava</groupId>
+			<artifactId>scijava-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
 </project>

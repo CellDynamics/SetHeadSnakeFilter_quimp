@@ -34,13 +34,6 @@ public class SetHeadSnakeFilter_Test {
     /**
      * Accessor to private fields
      * 
-     * Example of use:
-     * 
-     * @code{.java} Snake s = new Snake(pr, 1); int ret = (int)
-     *              accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s }, new
-     *              Class[] { Snake.class });
-     * @endcode
-     * 
      * @param name Name of private method
      * @param obj Reference to object
      * @param param Array of parameters if any
@@ -50,6 +43,7 @@ public class SetHeadSnakeFilter_Test {
      * @throws InvocationTargetException
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
+     * @return Private method
      */
     static Object accessPrivate(String name, SetHeadSnakeFilter_ obj, Object[] param,
             Class<?>[] paramtype) throws NoSuchMethodException, SecurityException,
@@ -81,6 +75,9 @@ public class SetHeadSnakeFilter_Test {
     public void tearDown() throws Exception {
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testFindNearestToBoundingBox() throws Exception {
         PolygonRoi pr = new PolygonRoi(d1.getFloatPolygon(), Roi.POLYGON);
@@ -90,6 +87,9 @@ public class SetHeadSnakeFilter_Test {
         assertEquals(1, ret);
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testFindNearestToBoundingBox_1() throws Exception {
         PolygonRoi pr = new PolygonRoi(d2.getFloatPolygon(), Roi.POLYGON);
@@ -100,6 +100,9 @@ public class SetHeadSnakeFilter_Test {
         assertEquals(4, ret);
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testFindNearestToBoundingBox_2() throws Exception {
         PolygonRoi pr = new PolygonRoi(d3.getFloatPolygon(), Roi.POLYGON);
