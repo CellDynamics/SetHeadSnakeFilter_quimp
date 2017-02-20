@@ -13,10 +13,11 @@ import org.slf4j.LoggerFactory;
 
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;
-import uk.ac.warwick.wsbc.QuimP.BOAState;
-import uk.ac.warwick.wsbc.QuimP.BOA_;
-import uk.ac.warwick.wsbc.QuimP.Snake;
-import uk.ac.warwick.wsbc.QuimP.plugin.utils.DataLoader;
+import uk.ac.warwick.wsbc.quimp.BOAState;
+import uk.ac.warwick.wsbc.quimp.BOA_;
+import uk.ac.warwick.wsbc.quimp.Node;
+import uk.ac.warwick.wsbc.quimp.Snake;
+import uk.ac.warwick.wsbc.quimp.plugin.utils.DataLoader;
 
 /**
  * @file SetHeadSnakeFilter_Test.java
@@ -93,8 +94,14 @@ public class SetHeadSnakeFilter_Test {
     @Test
     public void testFindNearestToBoundingBox_1() throws Exception {
         PolygonRoi pr = new PolygonRoi(d2.getFloatPolygon(), Roi.POLYGON);
-        LOGGER.debug(d2.toString());
+        LOGGER.debug("testFindNearestToBoundingBox_1" + d2.toString());
         Snake s = new Snake(pr, 1);
+        // dirty hack - move head if it was set to last node due to removing fake head in Snake
+        // constructor
+        Node n = s.getHead();
+        if (n.getX() == 4) {
+            s.setNewHead(n.getNext().getTrackNum());
+        }
         int ret = (int) accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s },
                 new Class[] { Snake.class });
         assertEquals(4, ret);
