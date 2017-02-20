@@ -100,7 +100,6 @@
 		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
-			<version>1.50d</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
