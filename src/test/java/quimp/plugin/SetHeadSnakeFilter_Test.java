@@ -13,10 +13,11 @@ import org.slf4j.LoggerFactory;
 
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;
-import uk.ac.warwick.wsbc.QuimP.BOAState;
-import uk.ac.warwick.wsbc.QuimP.BOA_;
-import uk.ac.warwick.wsbc.QuimP.Snake;
-import uk.ac.warwick.wsbc.QuimP.plugin.utils.DataLoader;
+import uk.ac.warwick.wsbc.quimp.BOAState;
+import uk.ac.warwick.wsbc.quimp.BOA_;
+import uk.ac.warwick.wsbc.quimp.Node;
+import uk.ac.warwick.wsbc.quimp.Snake;
+import uk.ac.warwick.wsbc.quimp.plugin.utils.DataLoader;
 
 /**
  * @file SetHeadSnakeFilter_Test.java
@@ -34,13 +35,6 @@ public class SetHeadSnakeFilter_Test {
     /**
      * Accessor to private fields
      * 
-     * Example of use:
-     * 
-     * @code{.java} Snake s = new Snake(pr, 1); int ret = (int)
-     *              accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s }, new
-     *              Class[] { Snake.class });
-     * @endcode
-     * 
      * @param name Name of private method
      * @param obj Reference to object
      * @param param Array of parameters if any
@@ -50,6 +44,7 @@ public class SetHeadSnakeFilter_Test {
      * @throws InvocationTargetException
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
+     * @return Private method
      */
     static Object accessPrivate(String name, SetHeadSnakeFilter_ obj, Object[] param,
             Class<?>[] paramtype) throws NoSuchMethodException, SecurityException,
@@ -81,6 +76,9 @@ public class SetHeadSnakeFilter_Test {
     public void tearDown() throws Exception {
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testFindNearestToBoundingBox() throws Exception {
         PolygonRoi pr = new PolygonRoi(d1.getFloatPolygon(), Roi.POLYGON);
@@ -90,16 +88,28 @@ public class SetHeadSnakeFilter_Test {
         assertEquals(1, ret);
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testFindNearestToBoundingBox_1() throws Exception {
         PolygonRoi pr = new PolygonRoi(d2.getFloatPolygon(), Roi.POLYGON);
-        LOGGER.debug(d2.toString());
+        LOGGER.debug("testFindNearestToBoundingBox_1" + d2.toString());
         Snake s = new Snake(pr, 1);
+        // dirty hack - move head if it was set to last node due to removing fake head in Snake
+        // constructor
+        Node n = s.getHead();
+        if (n.getX() == 4) {
+            s.setNewHead(n.getNext().getTrackNum());
+        }
         int ret = (int) accessPrivate("findNearestToBoundingBox", testobj, new Object[] { s },
                 new Class[] { Snake.class });
         assertEquals(4, ret);
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testFindNearestToBoundingBox_2() throws Exception {
         PolygonRoi pr = new PolygonRoi(d3.getFloatPolygon(), Roi.POLYGON);

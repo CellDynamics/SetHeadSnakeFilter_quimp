@@ -20,16 +20,16 @@ import org.scijava.vecmath.Vector2d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import uk.ac.warwick.wsbc.QuimP.Node;
-import uk.ac.warwick.wsbc.QuimP.PropertyReader;
-import uk.ac.warwick.wsbc.QuimP.Snake;
-import uk.ac.warwick.wsbc.QuimP.ViewUpdater;
-import uk.ac.warwick.wsbc.QuimP.geom.ExtendedVector2d;
-import uk.ac.warwick.wsbc.QuimP.plugin.IQuimpPluginSynchro;
-import uk.ac.warwick.wsbc.QuimP.plugin.ParamList;
-import uk.ac.warwick.wsbc.QuimP.plugin.QuimpPluginException;
-import uk.ac.warwick.wsbc.QuimP.plugin.snakes.IQuimpBOASnakeFilter;
-import uk.ac.warwick.wsbc.QuimP.plugin.utils.QWindowBuilder;
+import uk.ac.warwick.wsbc.quimp.Node;
+import uk.ac.warwick.wsbc.quimp.PropertyReader;
+import uk.ac.warwick.wsbc.quimp.Snake;
+import uk.ac.warwick.wsbc.quimp.ViewUpdater;
+import uk.ac.warwick.wsbc.quimp.geom.ExtendedVector2d;
+import uk.ac.warwick.wsbc.quimp.plugin.IQuimpPluginSynchro;
+import uk.ac.warwick.wsbc.quimp.plugin.ParamList;
+import uk.ac.warwick.wsbc.quimp.plugin.QuimpPluginException;
+import uk.ac.warwick.wsbc.quimp.plugin.snakes.IQuimpBOASnakeFilter;
+import uk.ac.warwick.wsbc.quimp.plugin.utils.QWindowBuilder;
 
 /**
  * Implements filter that change first node of Snake object.
@@ -112,8 +112,9 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
     }
 
     @Override
-    public void showUI(boolean val) {
+    public int showUI(boolean val) {
         toggleWindow(val);
+        return 0;
     }
 
     @Override
