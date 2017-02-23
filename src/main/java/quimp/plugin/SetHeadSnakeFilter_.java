@@ -112,7 +112,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
     }
 
     @Override
-    public int showUI(boolean val) {
+    public int showUi(boolean val) {
         toggleWindow(val);
         return 0;
     }
