@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/tree/HEAD)
+
+[Full Changelog](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/compare/v1.0.6...HEAD)
+
+**Fixed bugs:**
+
+- Plugin is not compatible with latest QuimP v17.05.01 [\#1](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/issues/1)
+
 ## [v1.0.6](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/tree/v1.0.6) (2017-03-14)
 [Full Changelog](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/compare/v1.0.5...v1.0.6)
 
