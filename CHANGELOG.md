@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/tree/HEAD)
-
-[Full Changelog](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/compare/v1.0.6...HEAD)
+## [v1.0.7](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/tree/v1.0.7) (2017-05-25)
+[Full Changelog](https://github.com/CellDynamics/SetHeadSnakeFilter_quimp/compare/v1.0.6...v1.0.7)
 
 **Fixed bugs:**
 
