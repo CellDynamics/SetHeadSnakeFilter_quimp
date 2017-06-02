@@ -1,8 +1,3 @@
-
-/**
- * @file SetHeadSnakeFilter_.java
- * @date 4 Apr 2016
- */
 package quimp.plugin;
 
 import java.awt.Choice;
@@ -20,16 +15,16 @@ import org.scijava.vecmath.Vector2d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import uk.ac.warwick.wsbc.quimp.Node;
-import uk.ac.warwick.wsbc.quimp.PropertyReader;
-import uk.ac.warwick.wsbc.quimp.Snake;
-import uk.ac.warwick.wsbc.quimp.ViewUpdater;
-import uk.ac.warwick.wsbc.quimp.geom.ExtendedVector2d;
-import uk.ac.warwick.wsbc.quimp.plugin.IQuimpPluginSynchro;
-import uk.ac.warwick.wsbc.quimp.plugin.ParamList;
-import uk.ac.warwick.wsbc.quimp.plugin.QuimpPluginException;
-import uk.ac.warwick.wsbc.quimp.plugin.snakes.IQuimpBOASnakeFilter;
-import uk.ac.warwick.wsbc.quimp.plugin.utils.QWindowBuilder;
+import com.github.celldynamics.quimp.Node;
+import com.github.celldynamics.quimp.PropertyReader;
+import com.github.celldynamics.quimp.Snake;
+import com.github.celldynamics.quimp.ViewUpdater;
+import com.github.celldynamics.quimp.geom.ExtendedVector2d;
+import com.github.celldynamics.quimp.plugin.IQuimpPluginSynchro;
+import com.github.celldynamics.quimp.plugin.ParamList;
+import com.github.celldynamics.quimp.plugin.QuimpPluginException;
+import com.github.celldynamics.quimp.plugin.snakes.IQuimpBOASnakeFilter;
+import com.github.celldynamics.quimp.plugin.utils.QWindowBuilder;
 
 /**
  * Implements filter that change first node of Snake object.

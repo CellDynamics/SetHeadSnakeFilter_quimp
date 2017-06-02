@@ -22,13 +22,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.celldynamics.quimp.BOAState;
+import com.github.celldynamics.quimp.BOA_;
+import com.github.celldynamics.quimp.Node;
+import com.github.celldynamics.quimp.Snake;
+import com.github.celldynamics.quimp.utils.test.DataLoader;
+
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;
-import uk.ac.warwick.wsbc.quimp.BOAState;
-import uk.ac.warwick.wsbc.quimp.BOA_;
-import uk.ac.warwick.wsbc.quimp.Node;
-import uk.ac.warwick.wsbc.quimp.Snake;
-import uk.ac.warwick.wsbc.quimp.utils.test.DataLoader;
 
 /**
  * @author p.baniukiewicz
