@@ -86,7 +86,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
    * @param par configuration as pairs <key,val>. Keys are defined by plugin creator and plugin
    *        caller do not modify them.
    * @throws QuimpPluginException on wrong parameters list or wrong parameter conversion
-   * @see uk.ac.warwick.wsbc.quimp.plugin.IQuimpPlugin#setPluginConfig(ParamList)
+   * @see com.github.celldynamics.quimp.plugin.IQuimpPlugin#setPluginConfig(ParamList)
    */
   @Override
   public void setPluginConfig(ParamList par) throws QuimpPluginException {
