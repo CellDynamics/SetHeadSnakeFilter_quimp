@@ -62,7 +62,7 @@ public class SetHeadSnakeFilter_ extends QWindowBuilder implements IQuimpBOASnak
     // configure window, names of UI elements are also names of variables
     // exported/imported by set/getPluginConfig
     uiDefinition.put("name", "SetHeadSnakeFilter"); // name of win
-    uiDefinition.put("method", "choice, minX, nearestCentroid, minXY");
+    uiDefinition.put("method", "choice: minX: nearestCentroid: minXY");
     uiDefinition.put("help",
             "Short description:\nminX - set head to point with smallest X coordinate"
                     + "\nnearestCentroid - set head to point which is closest to centroid point"
